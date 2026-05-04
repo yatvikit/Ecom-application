@@ -5,6 +5,7 @@ require("dotenv").config()
 let adminrt=require("./routes/adminroutes")
 let userrt=require("./routes/userrt")
 let productrt=require("./routes/productroutes")
+let cartrt=require("./routes/cartroutes")
 mongoose.connect(process.env.DB_URL).then(()=>{
     console.log("db connected");
 }
@@ -19,6 +20,7 @@ app.use("/admin",adminrt)
 app.use("/user",userrt)
 app.use("/images",express.static("./uploads"))
 app.use("/",productrt)
+app.use("/",cartrt)
 
 app.listen(process.env.PORT,()=>{
     console.log(`Server is running on port ${process.env.PORT}`);
