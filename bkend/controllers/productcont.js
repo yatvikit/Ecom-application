@@ -12,6 +12,7 @@ let storage=multer.diskStorage({
 let upload=multer({storage:storage})    
 let addproduct=async (req,res)=>{
     try {
+       
         let product=new Product({...req.body,"image":req.file.filename,"_id":Date.now().toString()})
         await product.save()
         res.status(201).json({message:"Product added successfully"})

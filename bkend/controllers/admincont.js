@@ -13,7 +13,7 @@ let addadmin=async(req,res)=>{
             let pwdhash=await bcrypt.hash(req.body.password,10)
             let admin=new Admin({...req.body,password:pwdhash})
             await admin.save()
-            res.status(201).json({message:"Admin added successfully"})
+            res.status(201).json({message:"Bussiness added successfully"})
         }
     } catch (error) {
         res.status(500).json({message:"Error adding admin"})
