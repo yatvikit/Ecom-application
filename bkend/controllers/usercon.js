@@ -30,7 +30,7 @@ let login=async(req,res)=>{
         {
             let match=await bcrypt.compare(req.body.password,user.password)
             if(match){
-                res.status(200).json({"token":jwt.sign({_id:user._id},process.env.SECRET_KEY,{expiresIn:"1h"}),"name":user.name       })
+                res.status(200).json({"token":jwt.sign({_id:user._id},process.env.SECRET_KEY,{expiresIn:"1h"}),"name":user.name,"userid":user._id,"role":"user"})
             }
             else{
                 res.status(400).json({message:"Invalid credentials"})
