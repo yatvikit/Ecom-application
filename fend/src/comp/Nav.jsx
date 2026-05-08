@@ -11,7 +11,7 @@ const Nav = () => {
         <Link to="/userregister">UserRegister</Link>
         <Link to="/br">BS Reg</Link>
          <Link to="/adminlogin">AdminLogin</Link></>:<>
-         <Link to="/cart">Cart</Link>
+         <Link to="/cart">Cart<button>{state.cartCount}</button></Link>
        {(state.role==="admin" ||state.role==="merchant" )&& <Link to="/addproduct">AddProduct</Link>}
        {state.role==="merchant" && <Link to="/merchentdashboard">MerchentDashboard</Link>}
        {state.role==="admin" && <Link to="/admindashboard">AdminDashboard</Link>}    

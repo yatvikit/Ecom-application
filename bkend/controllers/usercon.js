@@ -2,6 +2,7 @@ let User=require("../models/usermodel")
 let bcrypt=require("bcrypt")
 let jwt=require("jsonwebtoken")
 let nodemailer=require("nodemailer")
+const Cart = require("../models/cartmodel")
 let adduser=async(req,res)=>{
     try {
         let exist=await User.findById(req.body._id)
@@ -30,7 +31,8 @@ let login=async(req,res)=>{
         {
             let match=await bcrypt.compare(req.body.password,user.password)
             if(match){
-                res.status(200).json({"token":jwt.sign({_id:user._id},process.env.SECRET_KEY,{expiresIn:"1h"}),"name":user.name,"userid":user._id,"role":"user"})
+                let arr=await Cart.find({userid:user._id})  
+                res.status(200).json({"token":jwt.sign({_id:user._id},process.env.SECRET_KEY,{expiresIn:"1h"}),"name":user.name,"userid":user._id,"role":"user","cartCount":arr.length})
             }
             else{
                 res.status(400).json({message:"Invalid credentials"})

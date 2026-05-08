@@ -25,6 +25,7 @@ const Products = () => {
         setTimeout(() => {
           setF(false)
         }, 5000);
+        navigation("/cart")
       })
     } 
     else{
