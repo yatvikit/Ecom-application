@@ -20,6 +20,8 @@ const UserLogin = () => {
       else{
         setMsg(res.data.message)
       } 
+    }).catch((err)=>{
+      setMsg("Error logging in")
     })
   }
 

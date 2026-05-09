@@ -64,5 +64,20 @@ let updateproductimage=async(req,res)=>{
         res.status(500).json({message:"Error updating product image"})
     }
 }
-
-module.exports={addproduct,getproducts,getproduct,deleteproduct,updateproductdetails,updateproductimage,upload}
+let addcomment=async(req,res)=>{
+    try {
+        let product=await Product.findByIdAndUpdate(req.body.pid,{$push:{"comments":{"name":req.body.name,"text":req.body.text,"rating":req.body.rating}}})
+        res.status(200).json({message:"Comment added successfully"})
+    } catch (error) {
+        res.status(500).json({message:"Error adding comment"})
+    } 
+}
+let getprodbymerchant=async(req,res)=>{
+    try {
+        let products=await Product.find({"salername":req.params.name})
+        res.status(200).json(products)
+    } catch (error) {
+        res.status(500).json({message:"Error fetching products"})
+    }      
+}
+module.exports={addproduct,getproducts,getproduct,deleteproduct,updateproductdetails,updateproductimage,upload,addcomment,getprodbymerchant}
