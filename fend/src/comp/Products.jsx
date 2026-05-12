@@ -12,11 +12,12 @@ const Products = () => {
   let {state}=useContext(Ct)
   let navigation=useNavigate()
   let [f,setF]=useState(false)
+    let [f1,setF1]=useState(false)
   useEffect(()=>{
     axios.get("http://localhost:5000/getproducts").then((res)=>{
       setData(res.data)
     })  
-  },[])
+  },[f1])
   let addcart=(item)=>{
     if(state.token!=""){
       axios.post("http://localhost:5000/addcart",{"productid":item._id,"name":item.name,"price":item.price,"image":item.image,"salername":item.salername,"userid":state.userid}).then((res)=>{
@@ -32,6 +33,11 @@ const Products = () => {
       navigation("/userlogin")  
 
     }
+  }
+    let del=(id)=>{
+    axios.delete(`http://localhost:5000/deleteproduct/${id}`).then((res)=>{
+    setF1(!f1)
+    })
   }
  
         return (
@@ -49,7 +55,7 @@ const Products = () => {
             <button><Link to={`/edit/${item._id}`}>Edit</Link> </button>
           )}
          {state.role==='admin' && (
-            <button>Delete</button>
+            <button onClick={() => del(item._id)}>Delete</button>
           )}
 
         </div>

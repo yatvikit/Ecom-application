@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {useState,useContext} from 'react'
 import Ct from './Ct'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const UserLogin = () => {
   let [data,setData]=useState({"_id":"","password":""})
   let [msg,setMsg]=useState("")
@@ -34,6 +34,8 @@ const UserLogin = () => {
         <input type="email" name="_id" placeholder="Email" value={data._id} onChange={handleChange} />
         <input type="password" name="password" placeholder="Password" value={data.password} onChange={handleChange} />
         <button onClick={login}>Login</button>
+        
+         <Link to="/resetpassword">Forgot Password?</Link>
       </div>
     </div>
   )

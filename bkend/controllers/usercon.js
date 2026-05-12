@@ -62,6 +62,7 @@ const transporter = nodemailer.createTransport({
 let genotp=async(req,res)=>{
     try {
         let user=await User.findById(req.body._id)
+        console.log(user)
         if(!user){
             return res.status(400).json({message:"User not found"})
         }
@@ -91,7 +92,7 @@ let resetpwd=async(req,res)=>{
     try {
         let user=await User.findById(req.body._id)
         if(user.otp===req.body.otp){
-            let pwdhash=await bcrypt.hash(req.body.password,10)
+            let pwdhash=await bcrypt.hash(req.body.newpwd,10)
             await User.findByIdAndUpdate(req.body._id,{password:pwdhash,otp:""})
             res.status(200).json({message:"Password reset successful"})
         }
